@@ -2,12 +2,14 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.ArrayList;
 
-public class Connect4 extends JPanel implements MouseListener{
+public class Connect4 extends JPanel implements MouseListener, KeyListener{
 
     // These control the size of the board.  The traditional Connect 4 board is 
     // seven spaces wide by six spaces high
@@ -35,6 +37,8 @@ public class Connect4 extends JPanel implements MouseListener{
         myFrame = new JFrame();
         this.myBoard = new Board(rows, cols);
         addMouseListener(this);
+        addKeyListener(this);
+        this.setFocusable(true);
         // the hard numbers at the end are for the menubar at the top and side handles
         myFrame.setSize( myBoard.getCols() * (pieceSize + spacing) + spacing + 10,
                          myBoard.getRows() * (pieceSize + spacing) + spacing + headerHeight + 35);
@@ -215,6 +219,36 @@ public class Connect4 extends JPanel implements MouseListener{
     //////
     public static void main( String[] args ){
         Connect4 connect4 = new Connect4(ROWS, COLS);
+    }
+
+
+
+    
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+
+
+    
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_Q || e.getKeyChar() == 'q') {
+            new QuitMove(getCurrentPlayer(), "loser");
+           System.out.println("quit:");
+        }
+        
+        if (e.getKeyCode() == KeyEvent.VK_Q || e.getKeyChar() == 'b') {
+            new QuitMove(getCurrentPlayer(), "BOOM");
+            System.out.println("boomboom");
+           
+        }
+    }
+
+
+
+    
+    public void keyReleased(KeyEvent e) {
+      
     }
 
 }
